@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="">
 
 <head>
     <meta charset="UTF-8">
@@ -22,14 +22,14 @@
     <main>
         <section>
             <!-- display data -->
-            <div id="display-container" class="grid grid-cols-3 gap-6 p-10 text-left">
+            <div id="display-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 p-10 text-left">
 
             </div>
         </section>
 
         <!-- see more button -->
-        <div class="text-center my-8">
-            <button class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-error text-white">Sort By Date</button>
+        <div id="see-more-container" class="text-center my-8 hidden">
+            <button onclick="seeMoreHandler()" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-error text-white">Sort By Date</button>
         </div>
     </main>
 

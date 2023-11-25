@@ -1,26 +1,40 @@
 // 1- fetch data
-const loadData = async () => {
+const loadData = async (isShowAll) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/ai/tools`);
     const info = await res.json();
     const data = info.data.tools;
     // console.log(data);
-    displayData(data)
+    displayData(data, isShowAll)
 }
 
-const displayData = (data) => {
+const displayData = (data, isShowAll) => {
 
 
     // 2- get the display container
     const displayContainer = document.getElementById('display-container');
 
-    data.forEach(ai => {
-        console.log(ai);
+    // 4.1- show all button (working)
+    const showAllButtonContainer = document.getElementById('see-more-container')
+    if (data.length > 6 && !isShowAll) {
+        showAllButtonContainer.classList.remove('hidden');
+    } else {
+        showAllButtonContainer.classList.add('hidden');
+    }
 
+
+    // limit data if exceeds over 6
+    if (!isShowAll) {
+        data = data.slice(0, 6);
+    }
+
+
+    data.forEach(ai => {
+        // console.log(ai);
 
         // 3- create element
         const dataContainer = document.createElement('div');
         dataContainer.innerHTML = `
-        <div class="card bg-base-100 shadow-xl">
+        <div class="card bg-base-100 shadow-lg shadow-cyan-100/50 hover:shadow-blue-300/50 hover:shadow-xl">
             <figure class="px-8 pt-10">
                 <img src="${ai?.image || 'No Image found'}" alt="" class="rounded-xl" />
             </figure>
@@ -38,9 +52,9 @@ const displayData = (data) => {
                         <p> <i class="fa-solid fa-calendar-days"></i> ${ai?.published_in} </p>
                     </div>
                     <div class="card-actions">
-                        <a href="">
+                        <button class="btn btn-circle">
                             <i class="fa-solid fa-circle-arrow-right text-5xl text-sky-500"></i>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -49,6 +63,12 @@ const displayData = (data) => {
         displayContainer.appendChild(dataContainer);
 
     });
+}
+
+
+// 4- see more button
+const seeMoreHandler = () => {
+    loadData(true);
 }
 
 loadData();
