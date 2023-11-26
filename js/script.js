@@ -129,7 +129,7 @@ const showAiDetails = (details) => {
             </div>
             <div class="text-center space-y-4 relative">
                 <div class="badge badge-error gap-2 absolute top-6 right-2 text-white">
-                    ${details?.accuracy?.score || ''} accuracy
+                    ${details?.accuracy?.score || 'No'} accuracy
                 </div>
                 <img src=" ${details.image_link[0] || 'No Image found'}" class="rounded-lg"  alt="">
                 <h3 class="text-2xl mb-4"> ${details?.input_output_examples[0]?.input} </h3>
