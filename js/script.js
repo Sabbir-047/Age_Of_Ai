@@ -81,6 +81,7 @@ const aiDetailsHandler = async (id) => {
     showAiDetails(details);
     features2Container(details);
     integrationContainer(details);
+    // modalBannerContainer(details);
 
     // show modal
     show_ai_details.showModal();
@@ -96,33 +97,42 @@ const showAiDetails = (details) => {
     // create div
     toolDetailsContainer.classList.add('text-white');
     toolDetailsContainer.innerHTML = `
-        <h3 class="text-2xl"> ${details.description} </h3>
-        <div class="grid grid-cols-3 gap-4 text-center">
-            <div class="bg-gray-100 p-3 rounded-xl font-bold text-green-600">
-                <p> ${details.pricing[0].price} </p>
-                <p> ${details.pricing[0].plan} </p>
-            </div> 
-            <div class="bg-gray-100 p-3 rounded-xl font-bold text-orange-600">
-                <p> ${details.pricing[1].price} </p>
-                <p> ${details.pricing[1].plan} </p>
-            </div> 
-            <div class="bg-gray-100 p-3 rounded-xl font-bold text-red-600">
-                <p> ${details.pricing[2].price} </p>
-                <p> ${details.pricing[2].plan} </p>
-            </div> 
-        </div>
-        <div class="flex justify-around">
-            <div>
-                <h3 class="text-2xl mb-4">Features</h3>
-                <ol id="features2" class="ml-5 space-y-2" style="list-style: circle">
-                    
-                </ol>
+        <section class="grid grid-cols-1 lg:grid-cols-2 justify-between gap-8 p-5">
+            <div class="">
+                <h3 class="text-2xl"> ${details.description} </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-center my-6">
+                    <div class="bg-gray-100 p-0 md:p-3 rounded-xl font-bold text-green-600">
+                        <p> ${details?.pricing[0]?.price} </p>
+                        <p> ${details?.pricing[1]?.plan} </p>
+                    </div> 
+                    <div class="bg-gray-100 p-3 rounded-xl font-bold text-orange-600">
+                        <p> ${details?.pricing[1]?.price} </p>
+                        <p> ${details?.pricing[1]?.plan} </p>
+                    </div> 
+                    <div class="bg-gray-100 p-3 rounded-xl font-bold text-red-600">
+                        <p> ${details?.pricing[2]?.price} </p>
+                        <p> ${details?.pricing[2]?.plan} </p>
+                    </div> 
+                </div>
+                <div class="flex justify-between">
+                    <div>
+                        <h3 class="text-2xl mb-4">Features</h3>
+                        <ol id="features2" class="ml-5 space-y-2" style="list-style: circle">
+                            
+                        </ol>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl mb-4">Integrations</h3>
+                        <ol id="integration-container" class=" space-y-2" style="list-style: circle;"></ol>
+                    </div>
+                </div>
             </div>
-            <div>
-                <h3 class="text-2xl mb-4">Integrations</h3>
-                <ol id="integration-container" class=" space-y-2" style="list-style: circle;"></ol>
+            <div class="text-center space-y-4">
+                <img src=" ${details.image_link[0] || 'No Image found'}" class="rounded-lg"  alt="">
+                <h3 class="text-2xl mb-4"> ${details?.input_output_examples[0]?.input} </h3>
+                <p> ${details?.input_output_examples[0]?.output} </p>
             </div>
-        </div>
+        </section>
         `
 }
 
@@ -135,7 +145,7 @@ const showAiDetails = (details) => {
  *  
  */
 const features2Container = (details) => {
-
+    console.log(details);
     const features2 = details.features;
 
     const features2Container = document.getElementById('features2');
@@ -152,8 +162,8 @@ const features2Container = (details) => {
 
 
 // 8 - Integrations inside modal part by looping
-const integrationContainer = (details) => { 
-    console.log(details);
+const integrationContainer = (details) => {
+    // console.log(details);
     const integrationContainer = document.getElementById('integration-container');
     const integrationList = details.integrations;
     for (const integrationData of integrationList) {
@@ -164,6 +174,14 @@ const integrationContainer = (details) => {
         integrationContainer.appendChild(integrations);
     }
 }
+
+
+
+// // 9- Modal image-description part
+// const modalBannerContainer = (details) => { 
+//     console.log(details);
+
+// }
 
 
 
